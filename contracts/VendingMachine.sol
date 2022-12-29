@@ -13,10 +13,15 @@ contract VendingMachine {
 
     modifier onlyOwner() {
         require(owner == msg.sender, "only owner can call this method");
+        _;
     }
 
     function getDonutBalance() public view returns (uint){
         return donutBalance[address(this)];
+    }
+
+    function restock (uint amount) public onlyOwner {
+        donutBalance[address(this)] += amount;
     }
 
 }
